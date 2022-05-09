@@ -19,23 +19,23 @@ checkRootUser
  cd /usr/share/nginx/html
 
  echo "remove old files"
- rm -rf * >/tmp/roboshop.log
+ rm -rf * >>Log_File
  statusCheck $?
 
  echo "extracting zip content"
- unzip /tmp/frontend.zip >/tmp/roboshop.log
+ unzip /tmp/frontend.zip >>Log_File
  statusCheck $?
 
  echo "move files"
- mv frontend-main/* . >/tmp/roboshop.log
+ mv frontend-main/* . >>Log_File
  mv static/* . >/tmp/roboshop.log
  rm -rf frontend-main README.md >/tmp/roboshop.log
  statusCheck $?
 
  echo "copy nginx config"
- mv localhost.conf /etc/nginx/default.d/roboshop.conf >/tmp/roboshop.log
+ mv localhost.conf /etc/nginx/default.d/roboshop.conf >>Log_File
  statusCheck $?
 
  echo "restart nginx"
- systemctl restart nginx >/tmp/roboshop.log
+ systemctl restart nginx >>Log_File
  statusCheck $?
