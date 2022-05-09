@@ -16,6 +16,8 @@ if [ $1 -eq 0 ]; then
 else
   echo -e "\e[32mFailure\e[0m"
 
+  echo "check the error in log in ${LOG_FILE} "
+
   exit 1
   fi
 
