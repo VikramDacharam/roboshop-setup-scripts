@@ -5,11 +5,11 @@ source components/common.sh
 checkRootUser
 
  echo "install nginx"
- yum install nginx -y >>$(LOG_FILE)
+ yum install nginx -y >>$LOG_FILE
  statusCheck $?
 
  echo "enable nginx"
- systemctl enable nginx >>$(LOG_FILE)
+ systemctl enable nginx >>$LOG_FILE
  statusCheck $?
 
  echo "Downloading frontend code"
