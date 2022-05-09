@@ -5,37 +5,37 @@ source components/common.sh
 checkRootUser
 
  echo "install nginx"
- yum install nginx -y >>$(Log_File)
+ yum install nginx -y >>$(LOG_FILE)
  statusCheck $?
 
  echo "enable nginx"
- systemctl enable nginx >>$(Log_File)
+ systemctl enable nginx >>$(LOG_FILE)
  statusCheck $?
 
  echo "Downloading frontend code"
- curl -s -L -o /tmp/frontend.zip "https://github.com/roboshop-devops-project/frontend/archive/main.zip" >>(Log_File)
+ curl -s -L -o /tmp/frontend.zip "https://github.com/roboshop-devops-project/frontend/archive/main.zip" >>$(LOG_FILE)
  statusCheck $?
 
  cd /usr/share/nginx/html
 
  echo "remove old files"
- rm -rf * >>$(Log_File)
+ rm -rf * >>$(LOG_FILE)
  statusCheck $?
 
  echo "extracting zip content"
- unzip /tmp/frontend.zip >>$(Log_File)
+ unzip /tmp/frontend.zip >>$(LOG_FILE)
  statusCheck $?
 
  echo "move files"
- mv frontend-main/* . >>$(Log_File)
- mv static/* . >>$(Log_File)
- rm -rf frontend-main README.md >>$(Log_File)
+ mv frontend-main/* . >>$(LOG_FILE)
+ mv static/* . >>$(LOG_FILE)
+ rm -rf frontend-main README.md >>$(LOG_FILE)
  statusCheck $?
 
  echo "copy nginx config"
- mv localhost.conf /etc/nginx/default.d/roboshop.conf >>$(Log_File)
+ mv localhost.conf /etc/nginx/default.d/roboshop.conf >>$(LOG_FILE)
  statusCheck $?
 
  echo "restart nginx"
- systemctl restart nginx >>$(Log_File)
+ systemctl restart nginx >>$(LOG_FILE)
  statusCheck $?

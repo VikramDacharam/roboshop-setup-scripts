@@ -21,7 +21,7 @@ else
 
   }
 
-  Log_File=/tmp/roboshop.log
-  rm -f $Log_File
+  LOG_FILE=/tmp/roboshop.log
+  rm -f $LOG_FILE
 
 
