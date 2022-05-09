@@ -8,3 +8,8 @@ checkRootUser(){
 
   fi
 }
+
+checkStatus(){
+
+
+}
