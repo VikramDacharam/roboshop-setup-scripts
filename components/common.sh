@@ -1,12 +1,10 @@
-#!/usr/bin/env bash
+checkRootUser(){
 
-checkRootUser() {
+   USER_ID=$(id -u)
 
-  USER_ID=$(id -u)
+  if [ "$User_ID" -ne "0" ]; then
+    echo -e "\e[32myou are suppose to be running script as sudo or root checkRootUser\e[0m"
+    exit
 
-if [ "$User_ID" -ne "0" ]; then
-  echo -e "\e[32myou are suppose to be running script as sudo or root checkRootUser\e[0m"
-  exit
-
-fi
+  fi
 }
