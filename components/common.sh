@@ -8,5 +8,3 @@ checkRootUser(){
 
   fi
 }
-
-checkRootUser
