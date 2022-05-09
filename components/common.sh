@@ -8,3 +8,5 @@ checkRootUser(){
 
   fi
 }
+
+checkRootUser
