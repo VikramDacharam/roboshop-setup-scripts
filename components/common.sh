@@ -24,4 +24,10 @@ else
   LOG_FILE=/tmp/roboshop.log
   rm -f $LOG_FILE
 
+ECHO(){
+
+  echo "===============$1===============" >>$LOG_FILE
+  echo "$1"
+}
+
 
