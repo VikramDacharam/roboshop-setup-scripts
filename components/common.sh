@@ -3,7 +3,7 @@ checkRootUser() {
 USER_ID=$(id -u)
 
 if [ "$User_ID" -ne "0" ]; then
-  echo you are suppose to be running script as sudo or root checkRootUser
+  echo -e "\e[32myou are suppose to be running script as sudo or root checkRootUser\e[0m"
   exit
 
 fi
