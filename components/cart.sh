@@ -1,3 +1,5 @@
 #!/usr/bin/env bash
 
-echo cart
+source components/common.sh
+
+checkRootUser
