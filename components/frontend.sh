@@ -8,10 +8,6 @@ checkRootUser
  yumm install nginx -y &>>$LOG_FILE
  statusCheck $?
 
- ECHO "enable nginx"
- systemctl enable nginx &>>$LOG_FILE
- statusCheck $?
-
  ECHO "Downloading frontend code"
  curl -s -L -o /tmp/frontend.zip "https://github.com/roboshop-devops-project/frontend/archive/main.zip" &>>$LOG_FILE
  statusCheck $?
@@ -27,9 +23,7 @@ checkRootUser
  statusCheck $?
 
  ECHO "move files"
- mv frontend-main/* . &>>$LOG_FILE
- mv static/* . &>>$LOG_FILE
- rm -rf frontend-main README.md &>>$LOG_FILE
+ mv frontend-main/* . &>>$LOG_FILE && mv static/* . &>>$LOG_FILE && rm -rf frontend-main README.md &>>$LOG_FILE
  statusCheck $?
 
  ECHO "copy nginx config"
@@ -37,5 +31,5 @@ checkRootUser
  statusCheck $?
 
  ECHO "restart nginx"
- systemctl restart nginx &>>$LOG_FILE
+ systemctl enable nginx &>>$LOG_FILE && systemctl restart nginx &>>$LOG_FILE
  statusCheck $?
