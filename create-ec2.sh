@@ -5,13 +5,8 @@ if [ -z "$1" ]; then
   exit 1
 fi
 
-if [ "$1" == "list" ]; then
- aws ec2 describe-instances --query "Reservations[*].Instances[*].{PrivateIp:PrivateIpAddress,PublicIp:PublicIpAddress,Name:Tags[?Key=='Name']|[0.Value, Status:state.name}" --output table
- exit 0
+NAME=$1
 
- NAME=$1
-
-fi
 aws ec2 describe-spot-instance-requests --filters Name=tag:Name,Values=${NAME} Name=state,Values=active --output table | grep InstanceId &>/dev/null
 if [ $? -eq 0 ]; then
 echo "instance alrdy exists"
