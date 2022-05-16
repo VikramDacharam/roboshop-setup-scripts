@@ -21,5 +21,10 @@ ECHO "installing mongodb"
 yum install -y mongodb-org &>>${LOG_FILE}
 statusCheck $?
 
+ECHO "configure listen Address in Mongodb configuration"
+sed -i -e 's/127.0.0.1/0.0.0.0/' /etc/mongod.conf
+statusCheck $?
+
+
 
 
