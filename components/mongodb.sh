@@ -25,6 +25,25 @@ ECHO "configure listen Address in Mongodb configuration"
 sed -i -e 's/127.0.0.1/0.0.0.0/' /etc/mongod.conf
 statusCheck $?
 
+ECHO "start mongodb service"
+systemctl restart mongod &>>${LOG_FILE} && systemctl enable mongod
+statusCheck $?
+
+ECHO "Download schema"
+curl -s -L -o /tmp/mongodb.zip "https://github.com/roboshop-devops-project/mongodb/archive/main.zip"
+statusCheck $?
+
+ECHO "extract shcema zip"
+cd /tmp && unzip mongodb.zip
+statusCheck &?
+
+cd mongodb-main
+ECHO "Load schema"
+mongo < catalogue.js >>${LOG_FILE} && mongo < users.js >>${LOG_FILE}
+statusCheck $?
+
+
+
 
 
 
