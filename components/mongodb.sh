@@ -26,15 +26,15 @@ sed -i -e 's/127.0.0.1/0.0.0.0/' /etc/mongod.conf
 statusCheck $?
 
 ECHO "start mongodb service"
-systemctl restart mongod &>>${LOG_FILE} && systemctl enable mongod
+systemctl restart mongod &>>${LOG_FILE} && systemctl enable mongod >>${LOG_FILE}
 statusCheck $?
 
 ECHO "Download schema"
-curl -s -L -o /tmp/mongodb.zip "https://github.com/roboshop-devops-project/mongodb/archive/main.zip"
+curl -s -L -o /tmp/mongodb.zip "https://github.com/roboshop-devops-project/mongodb/archive/main.zip" >>${LOG_FILE}
 statusCheck $?
 
 ECHO "extract shcema zip"
-cd /tmp && unzip -o mongodb.zip &>>${LOG_FILE}
+cd /tmp && unzip -o mongodb.zip >>${LOG_FILE}
 statusCheck &?
 
 cd mongodb-main
