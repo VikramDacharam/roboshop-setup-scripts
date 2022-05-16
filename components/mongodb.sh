@@ -34,8 +34,9 @@ curl -s -L -o /tmp/mongodb.zip "https://github.com/roboshop-devops-project/mongo
 statusCheck $?
 
 ECHO "extract shcema zip"
-cd /tmp && unzip -o mongodb.zip >>${LOG_FILE}
-statusCheck &?
+cd /tmp
+unzip -o mongodb.zip >>${LOG_FILE}
+statusCheck $?
 
 cd mongodb-main
 ECHO "Load schema"
