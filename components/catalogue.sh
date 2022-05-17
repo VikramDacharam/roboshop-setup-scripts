@@ -21,7 +21,7 @@ curl -sL https://rpm.nodesource.com/setup_lts.x | bash &>>${LOG_FILE}
 statusCheck $?
 
 ECHO "Install nodejs"
-yum install nodejs gcc-c++ -y
+yum install nodejs gcc-c++ -y &>>${LOG_FILE}
 statusCheck &?
 
 
