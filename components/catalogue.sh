@@ -23,6 +23,6 @@ statusCheck $?
 
 ECHO "Install nodejs"
 yum install nodejs gcc-c++ -y &>>${LOG_FILE}
-statusCheck &?
+statusCheck $?
 
 
