@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 
+source components/common.sh
 checkRootUser
-statusCheck
+
 
 # useradd roboshop
 # $ curl -s -L -o /tmp/catalogue.zip "https://github.com/roboshop-devops-project/catalogue/archive/main.zip"
