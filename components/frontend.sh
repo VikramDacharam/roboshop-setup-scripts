@@ -30,6 +30,11 @@ checkRootUser
  mv localhost.conf /etc/nginx/default.d/roboshop.conf &>>$LOG_FILE
  statusCheck $?
 
+ ECHO "update nginx config"
+ sed -i -e '/catalogue/ s/localhost/catalogue.roboshop.internal/' /etc/nginx/default.d/roboshop.conf
+ statusCheck $?
+
+
  ECHO "restart nginx"
  systemctl enable nginx &>>$LOG_FILE && systemctl restart nginx &>>$LOG_FILE
  statusCheck $?
