@@ -11,7 +11,8 @@ checkRootUser
 # unzip mongodb.zip
 # cd mongodb-main
 # mongo < catalogue.js
-# mongo < users.js
+# mongo <
+# users.js
 
 ECHO "Setup Mongodb yum repo"
 curl -s -o /etc/yum.repos.d/mongodb.repo https://raw.githubusercontent.com/roboshop-devops-project/mongodb/main/mongo.repo &>>${LOG_FILE}
@@ -34,8 +35,7 @@ curl -s -L -o /tmp/mongodb.zip "https://github.com/roboshop-devops-project/mongo
 statusCheck $?
 
 ECHO "extract shcema zip"
-cd /tmp
-unzip -o mongodb.zip >>${LOG_FILE}
+cd /tmp && unzip -o mongodb.zip >>${LOG_FILE}
 statusCheck $?
 
 cd mongodb-main
