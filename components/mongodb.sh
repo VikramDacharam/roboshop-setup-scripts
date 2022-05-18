@@ -42,9 +42,3 @@ cd mongodb-main
 ECHO "Load schema"
 mongo < catalogue.js >>${LOG_FILE} && mongo < users.js >>${LOG_FILE}
 statusCheck $?
-
-
-
-
-
-
