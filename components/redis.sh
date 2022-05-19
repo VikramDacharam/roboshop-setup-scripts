@@ -10,15 +10,15 @@ checkRootUser
 # systemctl start redis
 
 ECHO "configure yum repos"
-curl -L https://raw.githubusercontent.com/roboshop-devops-project/redis/main/redis.repo -o /etc/yum.repos.d/redis.repo
+curl -L https://raw.githubusercontent.com/roboshop-devops-project/redis/main/redis.repo -o /etc/yum.repos.d/redis.repo &>>${LOG_FILE}
 statusCheck $?
 
 ECHO "install redis"
-yum install redis-6.2.7 -y
+yum install redis-6.2.7 -y &>>${LOG_FILE}
 statusCheck $?
 
 ECHO "Update redis configuration"
-sed -i -e 's/127.0.0.1/0.0.0.0/' /ect/redis.conf &>>${LOG_FILE}
+sed -i -e 's/127.0.0.1/0.0.0.0/' /etc/redis.conf &>>${LOG_FILE}
 statusCheck $?
 
 ECHO "start redis service"
