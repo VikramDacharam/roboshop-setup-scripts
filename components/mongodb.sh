@@ -40,5 +40,5 @@ statusCheck $?
 
 cd mongodb-main
 ECHO "Load schema"
-mongo < catalogue.js  && mongo < users.js >>${LOG_FILE}
+mongo < catalogue.js >>${LOG_FILE}  && mongo < users.js >>${LOG_FILE}
 statusCheck $?
