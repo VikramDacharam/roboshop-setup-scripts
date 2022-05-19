@@ -18,7 +18,7 @@ yum install redis-6.2.7 -y &>>${LOG_FILE}
 statusCheck $?
 
 ECHO "Update redis configuration"
-sed -i -e 's/127.0.0.1/0.0.0.0/' /etc/redis.conf /etc/redis/redis.conf &>>${LOG_FILE}
+sed -i -e 's/127.0.0.1/0.0.0.0/' /etc/redis.conf /etc/redis/redis.conf
 statusCheck $?
 
 ECHO "start redis service"
