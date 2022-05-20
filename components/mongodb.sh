@@ -19,7 +19,7 @@ curl -s -o /etc/yum.repos.d/mongodb.repo https://raw.githubusercontent.com/robos
 statusCheck $?
 
 ECHO "installing mongodb"
-yum install -y mongodb-org &>>${LOG_FILE}
+ yum install -y mongodb-org-5.0.8 &>>${LOG_FILE}
 statusCheck $?
 
 ECHO "configure listen Address in Mongodb configuration"
