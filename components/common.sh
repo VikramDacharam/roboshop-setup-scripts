@@ -42,7 +42,7 @@ ECHO "Install nodejs"
 yum install nodejs gcc-c++ -y &>>${LOG_FILE}
 statusCheck $?
 
-id roboshop &>>{LOG_FILE}
+id roboshop &>>${LOG_FILE}
 
 if [ $? -ne 0 ]; then
   ECHO "Add Application user"
@@ -63,7 +63,7 @@ cd /home/roboshop/${COMPONENT} && npm install &>>${LOG_FILE} && chown roboshop:r
 statusCheck $?
 
 ECHO "update systemd configure files"
-sed -i -e 's/MONGO_DNSNAME/mongodb.roboshop.internal/' -e 's/REDIS_ENDPOINT/redis.roboshop.internal' -e 's/MONGO_ENDPOINT/mongodb.roboshop.internal' /home/roboshop/${COMPONENT}/systemd.service
+sed -i -e 's/MONGO_DNSNAME/mongodb.roboshop.internal/' -e 's/REDIS_ENDPOINT/redis.roboshop.internal/' -e 's/MONGO_ENDPOINT/mongodb.roboshop.internal/' /home/roboshop/${COMPONENT}/systemd.service
 statusCheck $?
 
 ECHO "setup systemd service"
