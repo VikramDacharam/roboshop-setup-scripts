@@ -72,5 +72,3 @@ mv /home/roboshop/${COMPONENT}/systemd.service  /etc/systemd/system/${COMPONENT}
 statusCheck $?
 
 }
-
-
