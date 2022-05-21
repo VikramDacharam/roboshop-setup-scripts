@@ -3,3 +3,6 @@
 source components/common.sh
 
 checkRootUser
+COMPONENT=cart
+
+NodeJs
