@@ -2,6 +2,6 @@
 
 source components/common.sh
 checkRootUser
-COMPONENT=user
+COMPONENT=user1
 
 NodeJs
