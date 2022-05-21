@@ -36,5 +36,5 @@ checkRootUser
 
 
  ECHO "restart nginx"
- systemctl enable nginx &>>$LOG_FILE && systemctl restart nginx &>>$LOG_FILE
+ systemctl enable nginx &>>${LOG_FILE} && systemctl restart nginx &>>${LOG_FILE}
  statusCheck $?
