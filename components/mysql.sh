@@ -30,7 +30,12 @@ statusCheck $?
 
 Default_passwd=$( grep ' A temporary password ' /var/log/mysqld.log | awk '{print $NF}')
 echo "ALTER USER 'root'@'localhost' IDENTIFIED BY 'RoboShop@1';" >/tmp/root-pass.sql
-mysql -u root -p${Default_passwd} </tmp/root-pass.sql
+
+ECHO "reset mysql password"
+mysql --connect-expired-password -u root -p${Default_passwd} </tmp/root-pass.sql &>>${LOG_FILE}
+statusCheck $?
+
+
 
 
 
