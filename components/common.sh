@@ -45,6 +45,10 @@ ECHO "download application content"
 curl -s -L -o /tmp/${COMPONENT}.zip "https://github.com/roboshop-devops-project/${COMPONENT}/archive/main.zip"
 statusCheck $?
 
+
+ECHO "Extract Application Archieve"
+cd /home/roboshop && rm -rf ${COMPONENT} &>>${LOG_FILE} && unzip /tmp/${COMPONENT}.zip && mv ${COMPONENT}-main ${COMPONENT} &>>${LOG_FILE}
+statusCheck $?
 }
 NodeJs(){
 
@@ -56,10 +60,7 @@ ECHO "Install nodejs"
 yum install nodejs gcc-c++ -y &>>${LOG_FILE}
 statusCheck $?
 
-
-ECHO "Extract Application Archieve"
-cd /home/roboshop && rm -rf ${COMPONENT} &>>${LOG_FILE} && unzip /tmp/${COMPONENT}.zip && mv ${COMPONENT}-main ${COMPONENT} &>>${LOG_FILE}
-statusCheck $?
+Application_Setup
 
 ECHO "Install NodeJs Modules"
 cd /home/roboshop/${COMPONENT} && npm install &>>${LOG_FILE} && chown roboshop:roboshop /home/roboshop/${COMPONENT} -R
