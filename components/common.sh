@@ -42,7 +42,7 @@ if [ $? -ne 0 ]; then
 fi
 
 ECHO "download application content"
-curl -s -L -o /tmp/${COMPONENT}.zip "https://github.com/roboshop-devops-project/${COMPONENT}/archive/main.zip"
+curl -s -L -o /tmp/${COMPONENT}.zip "https://github.com/roboshop-devops-project/${COMPONENT}/archive/main.zip" &>>${LOG_FILE}
 statusCheck $?
 
 
@@ -50,6 +50,18 @@ ECHO "Extract Application Archieve"
 cd /home/roboshop && rm -rf ${COMPONENT} &>>${LOG_FILE} && unzip /tmp/${COMPONENT}.zip && mv ${COMPONENT}-main ${COMPONENT} &>>${LOG_FILE}
 statusCheck $?
 }
+
+Systemd_setup(){
+ECHO "update systemd configure files"
+sed -i -e 's/MONGO_DNSNAME/mongodb.roboshop.internal/' -e 's/REDIS_ENDPOINT/redis.roboshop.internal/' -e 's/MONGO_ENDPOINT/mongodb.roboshop.internal/' -e "s/CARTENDPOINT/cart.roboshop.internal/" -e "s/DBHOST/mysql.roboshop.internal/" -e 's/CATALOGUE_ENDPOINT/catalogue.roboshop.internal/' /home/roboshop/${COMPONENT}/systemd.service
+statusCheck $?
+
+ECHO "setup systemd service"
+mv /home/roboshop/${COMPONENT}/systemd.service  /etc/systemd/system/${COMPONENT}.service
+ systemctl daemon-reload &>>${LOG_FILE} && systemctl enable ${COMPONENT} &>>${LOG_FILE} && systemctl restart ${COMPONENT} &>>${LOG_FILE}
+statusCheck $?
+}
+
 NodeJs(){
 
 ECHO "configure NodeJs Yum Repos"
@@ -61,17 +73,6 @@ yum install nodejs gcc-c++ -y &>>${LOG_FILE}
 statusCheck $?
 
 Application_Setup
-
-Systemd_setup(){
-ECHO "update systemd configure files"
-sed -i -e 's/MONGO_DNSNAME/mongodb.roboshop.internal/' -e 's/REDIS_ENDPOINT/redis.roboshop.internal/' -e 's/MONGO_ENDPOINT/mongodb.roboshop.internal/' -e "s/CARTENDPOINT/cart.roboshop.internal" -e "s/DBHOST/mysql.roboshop.internal" -e 's/CATALOGUE_ENDPOINT/catalogue.roboshop.internal/' /home/roboshop/${COMPONENT}/systemd.service
-statusCheck $?
-
-ECHO "setup systemd service"
-mv /home/roboshop/${COMPONENT}/systemd.service  /etc/systemd/system/${COMPONENT}.service
- systemctl daemon-reload &>>${LOG_FILE} && systemctl enable ${COMPONENT} &>>${LOG_FILE} && systemctl restart ${COMPONENT} &>>${LOG_FILE}
-statusCheck $?
-}
 
 ECHO "Install NodeJs Modules"
 cd /home/roboshop/${COMPONENT} && npm install &>>${LOG_FILE} && chown roboshop:roboshop /home/roboshop/${COMPONENT} -R
