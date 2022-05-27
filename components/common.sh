@@ -87,10 +87,4 @@ Java(){
  ECHO "compile maven package"
  cd /home/roboshop/${COMPONENT} && mvn clean package &>>${LOG_FILE} && mv target/${COMPONENT}-1.0.jar ${COMPONENT}.jar &>>${LOG_FILE}
   statusCheck $?
-
-  # mv /home/roboshop/shipping/systemd.service /etc/systemd/system/shipping.service
-  # systemctl daemon-reload
-  # systemctl start shipping
-  # systemctl enable shipping
-
 }
