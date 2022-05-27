@@ -62,10 +62,6 @@ statusCheck $?
 
 Application_Setup
 
-ECHO "Install NodeJs Modules"
-cd /home/roboshop/${COMPONENT} && npm install &>>${LOG_FILE} && chown roboshop:roboshop /home/roboshop/${COMPONENT} -R
-statusCheck $?
-
 Systemd_setup(){
 ECHO "update systemd configure files"
 sed -i -e 's/MONGO_DNSNAME/mongodb.roboshop.internal/' -e 's/REDIS_ENDPOINT/redis.roboshop.internal/' -e 's/MONGO_ENDPOINT/mongodb.roboshop.internal/' -e "s/CARTENDPOINT/cart.roboshop.internal" -e "s/DBHOST/mysql.roboshop.internal" -e 's/CATALOGUE_ENDPOINT/catalogue.roboshop.internal/' /home/roboshop/${COMPONENT}/systemd.service
@@ -76,6 +72,12 @@ mv /home/roboshop/${COMPONENT}/systemd.service  /etc/systemd/system/${COMPONENT}
  systemctl daemon-reload &>>${LOG_FILE} && systemctl enable ${COMPONENT} &>>${LOG_FILE} && systemctl restart ${COMPONENT} &>>${LOG_FILE}
 statusCheck $?
 }
+
+ECHO "Install NodeJs Modules"
+cd /home/roboshop/${COMPONENT} && npm install &>>${LOG_FILE} && chown roboshop:roboshop /home/roboshop/${COMPONENT} -R
+statusCheck $?
+
+Systemd_setup
 
 }
 
@@ -90,6 +92,6 @@ Java(){
  cd /home/roboshop/${COMPONENT} && mvn clean package &>>${LOG_FILE} && mv target/${COMPONENT}-1.0.jar ${COMPONENT}.jar &>>${LOG_FILE}
   statusCheck $?
 
- Systemd_setup
+Systemd_setup
 
 }
