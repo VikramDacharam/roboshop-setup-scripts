@@ -2,6 +2,6 @@
 
 source components/common.sh
 checkRootUser
-COMPNENT=shipping
+COMPONENT=shipping
 
 Java
