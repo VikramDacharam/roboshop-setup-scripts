@@ -67,7 +67,7 @@ statusCheck $?
 
 Systemd_setup(){
 ECHO "update systemd configure files"
-sed -i -e 's/MONGO_DNSNAME/mongodb.roboshop.internal/' -e 's/REDIS_ENDPOINT/redis.roboshop.internal/' -e 's/MONGO_ENDPOINT/mongodb.roboshop.internal/' -e "s/CARTENDPOINT/cart.roboshop.internal" -e "s/DBHOST/" -e 's/CATALOGUE_ENDPOINT/catalogue.roboshop.internal/' /home/roboshop/${COMPONENT}/systemd.service
+sed -i -e 's/MONGO_DNSNAME/mongodb.roboshop.internal/' -e 's/REDIS_ENDPOINT/redis.roboshop.internal/' -e 's/MONGO_ENDPOINT/mongodb.roboshop.internal/' -e "s/CARTENDPOINT/cart.roboshop.internal" -e "s/DBHOST/mysql.roboshop.internal" -e 's/CATALOGUE_ENDPOINT/catalogue.roboshop.internal/' /home/roboshop/${COMPONENT}/systemd.service
 statusCheck $?
 
 ECHO "setup systemd service"
@@ -82,7 +82,8 @@ Java(){
 
   ECHO "Install java and Maven"
   yum install maven -y &>>${LOG_FILE}
- Application_Setup
+
+  Application_Setup
 
  ECHO "compile maven package"
  cd /home/roboshop/${COMPONENT} && mvn clean package &>>${LOG_FILE} && mv target/${COMPONENT}-1.0.jar ${COMPONENT}.jar &>>${LOG_FILE}
