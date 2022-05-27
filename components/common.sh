@@ -87,6 +87,6 @@ Java(){
   Application_Setup
 
  ECHO "compile maven package"
- cd /home/roboshop/${COMPONENT} && mvn clean package && mv target/${COMPONENT}-1.0.jar ${COMPONENT}.jar
+ cd /home/roboshop/${COMPONENT} && mvn clean package &>>${LOG_FILE} && mv target/${COMPONENT}-1.0.jar ${COMPONENT}.jar
   statusCheck $?
 }
